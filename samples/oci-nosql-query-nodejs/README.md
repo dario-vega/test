@@ -130,7 +130,10 @@ echo -n <JSON-object> | fn invoke <app-name> <function-name>
 e.g.
 ```
 echo '{"tableName":"Tutorial"}' | fn invoke myapp hello-nosql | jq
+```
 
+You should see the following JSON document appear in the terminal.
+```
 [
   {
     "id": 1,
@@ -143,7 +146,7 @@ echo '{"tableName":"Tutorial"}' | fn invoke myapp hello-nosql | jq
   }
 ]
 ```
-You should see a success message appear in the terminal.
+
 
 ## Clean Up
 
