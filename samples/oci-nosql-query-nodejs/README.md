@@ -34,6 +34,9 @@ In order to use other OCI Services, your function must be part of a dynamic
 group. For information on how to create a dynamic group, refer to the 
 [documentation](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingdynamicgroups.htm#To).
 
+![user input icon](./images/userinput.png)
+
+
 When specifying the *Matching Rules*, we suggest matching all functions in a compartment with:
 
 ```
