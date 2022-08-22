@@ -17,11 +17,6 @@ and C of the [Oracle Functions Quick Start Guide for Cloud Shell](https://www.or
     * B - Create application
     * C - Set up your Cloud Shell dev environment
 
-2. Have your Oracle Object Storage Namespace available. This can be found by
-logging into your [cloud account](https://console.us-ashburn-1.oraclecloud.com/),
-under your user profile, click on your Tenancy. Your Object Storage Namespace
-is shown there.
-
 
 ## List Applications 
 
@@ -102,6 +97,22 @@ e.g.
 fn -v deploy --app myapp
 ```
 
+## Create Nosql Tables
+
+````
+COMP_ID="<your_cmpid>"
+
+DDL_TABLE="CREATE TABLE IF NOT EXISTS Tutorial (id LONG GENERATED ALWAYS as IDENTITY (NO CYCLE), kv_json_ JSON, PRIMARY KEY( id ))"
+echo $DDL_TABLE
+
+oci nosql table create --compartment-id "$COMP_ID"   \
+--name Tutorial --ddl-statement "$DDL_TABLE" \
+--table-limits="{\"maxReadUnits\": 50,  \"maxStorageInGBs\": 25,  \"maxWriteUnits\": 50 }" \
+--wait-for-state SUCCEEDED --wait-for-state FAILED
+
+oci nosql row update  --compartment-id "$COMP_ID" --table-name-or-id Tutorial \
+--value '{"kv_json_": { "author": { "name": "Dario VEGA"},  "title": "Oracle Functions Samples with NOSQL DB"}}'
+````
 
 ## Test
 
@@ -126,4 +137,11 @@ echo '{"tableName":"Tutorial"}' | fn invoke myapp hello-nosql | jq
 ]
 ```
 You should see a success message appear in the terminal.
+
+## Clean Up
+
+```
+oci nosql table delete  --compartment-id "$COMP_ID"  --table-name-or-id Tutorial  
+```
+
 
