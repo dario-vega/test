@@ -1,8 +1,7 @@
 # Function that reads data  using the OCI Node.js for Oracle NoSQL Database
 
 This function uses Resource Principals to securely authorize a function to make
-API calls to  Oracle NoSQL Database
-It queries all table 
+API calls to  Oracle NoSQL Database. You can query tables in a compartment 
 
 
 
@@ -84,6 +83,21 @@ in the application created earlier:
 ![user input icon](./images/userinput.png)
 
 ```
+COMP_ID="<your_cmpid>"
+fn config app  <app-name> NOSQL_COMPARTMENT_ID $COMP_ID
+fn config app  <app-name> NOSQL_REGION $OCI_REGION
+```
+
+e.g.
+```
+COMP_ID="<your_cmpid>"
+fn config app  myapp NOSQL_COMPARTMENT_ID $COMP_ID
+fn config app  myapp NOSQL_REGION $OCI_REGION
+```
+
+
+
+```
 fn -v deploy --app <app-name>
 ```
 e.g.
@@ -100,13 +114,19 @@ echo -n <JSON-object> | fn invoke <app-name> <function-name>
 ```
 e.g.
 ```
-echo -n '{"objectName": "<object-name>", "bucketName": "<bucket-name>", "content": "<content>"}' | fn invoke myapp oci-objectstorage-put-object-python
+echo '{"tableName":"Tutorial"}' | fn invoke myapp hello-nosql | jq
+
+[
+  {
+    "id": 1,
+    "kv_json_": {
+      "author": {
+        "name": "Dario VEGA"
+      },
+      "title": "Oracle Functions Samples with NOSQL DB"
+    }
+  }
+]
 ```
 You should see a success message appear in the terminal.
-
-
-## Monitoring Functions
-
-Learn how to configure basic observability for your function using metrics, alarms and email alerts:
-* [Basic Guidance for Monitoring your Functions](../basic-observability/functions.md)
 
