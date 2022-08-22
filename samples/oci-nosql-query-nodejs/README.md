@@ -71,9 +71,6 @@ Review the following files in the current folder:
 - [func.yaml](./func.yaml) that contains metadata about your function and declares properties
 - [func.py](./func.py) which is your actual Python function
 
-The name of your function *oci-objectstorage-put-object-python* is specified in [func.yaml](./func.yaml).
-
-
 ## Deploy the function
 
 In Cloud Shell, run the `fn deploy` command to build the function and its dependencies as a Docker image, 
