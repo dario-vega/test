@@ -52,7 +52,7 @@ Create a new policy that allows the dynamic group to `manage objects` in the fun
 
 Your policy should look something like this:
 ```
-Allow dynamic-group <dynamic-group-name> to manage objects in compartment <compartment-name>
+Allow dynamic-group <dynamic-group-name> to manage nosql-family in compartment <compartment-name>
 ```
 e.g.
 ```
