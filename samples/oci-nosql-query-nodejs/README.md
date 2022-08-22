@@ -1,8 +1,8 @@
-# Function that reads data from Oracle NoSQL Cloud Service using the OCI Node.js for Oracle NoSQL Database
+# Function that reads data  using the OCI Node.js for Oracle NoSQL Database
 
 This function uses Resource Principals to securely authorize a function to make
 API calls to  Oracle NoSQL Database
-It creates ae and returns a message with a status.
+It queries all table 
 
 
 
