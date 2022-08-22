@@ -1,12 +1,10 @@
-# Function that creates an object in a bucket in Object Storage using the OCI Python SDK
+# Function that reads data from Oracle NoSQL Cloud Service using the OCI Node.js for Oracle NoSQL Database
 
 This function uses Resource Principals to securely authorize a function to make
-API calls to OCI services using the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html).
-It creates an object in a bucket in Object Storage and returns a message with a status.
+API calls to  Oracle NoSQL Database
+It creates ae and returns a message with a status.
 
-The function calls the following OCI Python SDK classes:
-* [Resource Principals Signer](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/signing.html#resource-principals-signer) to authenticate
-* [Object Storage Client](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/object_storage/client/oci.object_storage.ObjectStorageClient.html) to interact with Object Storage
+
 
 As you make your way through this tutorial, look out for this icon ![user input icon](./images/userinput.png).
 Whenever you see it, it's time for you to perform an action.
@@ -61,7 +59,7 @@ Allow dynamic-group <dynamic-group-name> to manage objects in compartment <compa
 ```
 e.g.
 ```
-Allow dynamic-group demo-func-dyn-group to manage objects in compartment demo-func-compartment
+Allow dynamic-group demo-func-dyn-group to manage nosql-family in compartment demo-func-compartment
 ```
 For more information on how to create policies, go [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policysyntax.htm).
 
@@ -70,7 +68,7 @@ For more information on how to create policies, go [here](https://docs.cloud.ora
 
 Review the following files in the current folder:
 
-- [requirements.txt](./requirements.txt) specifies all the dependencies for your function
+- [package.json](./package.json) specifies all the dependencies for your function
 - [func.yaml](./func.yaml) that contains metadata about your function and declares properties
 - [func.py](./func.py) which is your actual Python function
 
