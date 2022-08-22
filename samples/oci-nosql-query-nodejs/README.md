@@ -90,7 +90,7 @@ fn config app  <app-name> NOSQL_REGION $OCI_REGION
 
 e.g.
 ```
-COMP_ID="<your_cmpid>"
+COMP_ID="ocid1.compartment.oc1..aaaaaxxxxx"
 fn config app  myapp NOSQL_COMPARTMENT_ID $COMP_ID
 fn config app  myapp NOSQL_REGION $OCI_REGION
 ```
