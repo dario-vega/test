@@ -97,7 +97,11 @@ e.g.
 fn -v deploy --app myapp
 ```
 
+
 ## Create Nosql Tables
+
+![user input icon](./images/userinput.png)
+
 
 ````
 COMP_ID="<your_cmpid>"
