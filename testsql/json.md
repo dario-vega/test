@@ -34,6 +34,8 @@ Please go through the duality view documentation
   Duality Views blog (posted October 2022): https://blogs.oracle.com/database/post/json-relational-duality-app-dev?source=:so:ch:or:awr::::OCW23cbeta
   Oracle CloudWorld 2022 keynote - https://www.youtube.com/watch?v=e8-jBkO1NqY&t=17s
 
+## SQL Script
+
 ```sql  
 SET ECHO ON
 SET FEEDBACK 1
@@ -43,7 +45,7 @@ SET TRIMSPOOL ON
 SET TAB OFF
 SET PAGESIZE 100
 SET LONG 20000
-```
+
 
 prompt
 prompt ** Working with JSON Relational Duality Views using SQL **
