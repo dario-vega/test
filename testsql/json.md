@@ -43,6 +43,7 @@ SET TRIMSPOOL ON
 SET TAB OFF
 SET PAGESIZE 100
 SET LONG 20000
+```
 
 prompt
 prompt ** Working with JSON Relational Duality Views using SQL **
