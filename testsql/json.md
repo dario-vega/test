@@ -2,19 +2,22 @@
 
 ## DESCRIPTION
   This tutorial script walks you through examples of working with
-  JSON Relational Duality Views using Formula-1 (auto-racing) season data
+  **JSON Relational Duality Views** using Formula-1 (auto-racing) season data
   through SQL.
 
 ## PREREQUISITES
   Ensure that you have Oracle database 23c installed and running on a
-  port. Ensure that the compatible parameter is set to 23.0.0.0.
+  port. Ensure that the compatible parameter is set to `23.0.0.0.`
 
 ## USAGE
   Connect to the database as a regular (non-SYS) user and run this
-  script. The user must have create session and resource privileges.
+  script. The user must have `create session` and `resource` privileges.
   A demo user (janus) can be created using this statement:
-   GRANT CTXAPP, CONNECT, RESOURCE, UNLIMITED TABLESPACE, CREATE ANY
+  
+  ```sql
+  GRANT CTXAPP, CONNECT, RESOURCE, UNLIMITED TABLESPACE, CREATE ANY
      DIRECTORY, DROP ANY DIRECTORY, DBA TO janus IDENTIFIED BY janus;
+  ```
 
 ## NOTES
   Oracle Database 23c Free - Developer Release is the first release of
@@ -24,17 +27,22 @@
   Oracle Database 23c is planned to be generally available within the
   next 12 months.
 
-Please go through the duality view documentation
+## DOCUMENTATION
   (https://docs.oracle.com/en/database/oracle/oracle-database/23/jsnvu/index.html)
   to learn more about duality views and their advantages.
   This tutorial is analogous to the REST (Working with JSON Relational
   Duality Views using REST) and MongoAPI (Working with JSON Relational
   Duality Views using Oracle Database API for MongoDB) tutorials.
-  Additional resources:
+
+## ADDITIONAL RESOURCE:
   Duality Views blog (posted October 2022): https://blogs.oracle.com/database/post/json-relational-duality-app-dev?source=:so:ch:or:awr::::OCW23cbeta
   Oracle CloudWorld 2022 keynote - https://www.youtube.com/watch?v=e8-jBkO1NqY&t=17s
 
-## SQL Script
+## RUNNING THE TUTORIAL
+
+### Step 0
+
+Do cleanup for previous run (if any).
 
 ```sql  
 SET ECHO ON
@@ -60,7 +68,12 @@ drop table if exists driver_race_map;
 drop table if exists race;
 drop table if exists driver;
 drop table if exists team;
+```
+### Step 1
 
+Create JSON Relational Duality Views
+
+```sql  
 
 --------------------------------------------------
 -- Step 1: Create JSON Relational Duality Views --
@@ -283,6 +296,10 @@ CREATE OR REPLACE JSON RELATIONAL DUALITY VIEW team_dv AS
   };
 */
 
+```
+### Step 2: List all documents in a duality view
+
+```sql  
 
 --------------------------------------------------
 -- Step 2: List all documents in a duality view --
@@ -292,6 +309,10 @@ SELECT json_serialize(data PRETTY) FROM driver_dv;
 SELECT json_serialize(data PRETTY) FROM race_dv;
 SELECT json_serialize(data PRETTY) FROM team_dv;
 
+```
+### Step 3: Populate the duality views
+
+```sql  
 
 ----------------------------------------
 -- Step 3: Populate the duality views --
@@ -354,7 +375,10 @@ INSERT INTO race_dv VALUES ('{"_id"    : 203,
 
 COMMIT;
 
+```
+### Step 4: See the effects of populating a duality view
 
+```sql  
 ----------------------------------------------------------
 -- Step 4: See the effects of populating a duality view --
 ----------------------------------------------------------
@@ -370,6 +394,10 @@ COMMIT;
 SELECT json_serialize(data PRETTY) FROM driver_dv;
 SELECT json_serialize(data PRETTY) FROM race_dv;
 
+```
+### Step 5: Find documents matching a filter (predicate) with optional projection of fields and sorting
+
+```sql
 
 ----------------------------------------------------------
 -- Step 5: Find documents matching a filter (predicate) --
@@ -399,6 +427,10 @@ SELECT json_serialize(json_transform(data, KEEP '$.name', '$.team') PRETTY)
 SELECT json_serialize(json_transform(data, KEEP '$.name', '$.team') PRETTY)
   FROM driver_dv ORDER BY json_value(data, '$.team');
 
+```
+### Step 6: Replace a document by ID
+
+```sql
 
 --------------------------------------
 -- Step 6: Replace a document by ID --
@@ -456,6 +488,10 @@ COMMIT;
 SELECT json_serialize(data PRETTY)
   FROM race_dv dv WHERE dv.data."_id" = 201;
 
+```
+### Step 7: Update specific fields in the document identified by a predicate
+
+```sql
 
 ------------------------------------------------------------------------------
 -- Step 7: Update specific fields in the document identified by a predicate --
@@ -492,7 +528,10 @@ COMMIT;
 SELECT json_serialize(data PRETTY)
   FROM race_dv WHERE json_value(data, '$.name') LIKE 'Blue Air Bahrain%';
 
+```
+### Step 8: Re-parenting of sub-objects between two documents 
 
+```sql
 ---------------------------------------------------------------
 -- Step 8: Re-parenting of sub-objects between two documents --
 ---------------------------------------------------------------
@@ -555,6 +594,10 @@ SELECT json_serialize(data PRETTY) FROM driver_dv dv
 SELECT json_serialize(data PRETTY) FROM driver_dv dv
   WHERE dv.data.name LIKE 'George Russell%';
   
+```
+### Step 9: Update a non-updateable field
+
+```sql
 
 -------------------------------------------
 -- Step 9: Update a non-updateable field --
@@ -582,6 +625,10 @@ UPDATE driver_dv dv
             }')
   WHERE dv.data."_id" = 103;
 
+```
+### Step 10: Delete by predicate
+
+```sql
 
 ----------------------------------
 -- Step 10: Delete by predicate --
