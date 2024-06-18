@@ -1,4 +1,4 @@
-````sql
+```sql
 /*
 ** Copyright (c) 2023, 2024 Oracle and/or its affiliates
 ** The Universal Permissive License (UPL), Version 1.0
@@ -635,4 +635,4 @@ SELECT json_serialize(data PRETTY) FROM race_dv;
 SELECT json_serialize(data PRETTY) FROM driver_dv;
 
 COMMIT;
-````
+```
